@@ -1,7 +1,8 @@
 #include "Shell.h"
 
+#include "CommandParser.h"
+
 #include <iostream>
-#include <sstream>
 
 void Shell::Run()
 {
@@ -18,25 +19,45 @@ void Shell::Run()
         {
             break;
         }
-    
+
         ExecuteCommand(input);
     }
 }
 
 void Shell::ExecuteCommand(const std::string& input)
 {
-    std::istringstream iss(input);
-    std::string command;
-    iss >> command;
+    // s_CommandParser persists across calls to reuse parsing logic without reallocation.
+    static CommandParser s_CommandParser{};
 
-    if (command == "echo")
+    // l_Command captures the parsed representation of the raw user input.
+    const CommandParser::Command l_Command = s_CommandParser.ParseInput(input);
+
+    if (!l_Command.m_IsValid || l_Command.m_CommandName.empty())
     {
-        std::string rest;
-        std::getline(iss, rest);
-        std::cout << rest << std::endl;
+        // Inform the user that the input did not meet the parser's expectations.
+        std::cout << "Unable to parse command." << std::endl;
+        return;
+    }
+
+    if (l_Command.m_CommandName == "echo")
+    {
+        // l_Output assembles the original argument list with preserved spacing between tokens.
+        std::string l_Output{};
+        for (std::size_t l_Index = 0; l_Index < l_Command.m_Arguments.size(); ++l_Index)
+        {
+            if (l_Index > 0)
+            {
+                l_Output += ' ';
+            }
+
+            l_Output += l_Command.m_Arguments[l_Index];
+        }
+
+        std::cout << l_Output << std::endl;
     }
     else
     {
-        std::cout << "Unknown command: " << command << std::endl;
+        // Fallback path covering unsupported commands.
+        std::cout << "Unknown command: " << l_Command.m_CommandName << std::endl;
     }
 }

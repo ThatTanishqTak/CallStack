@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/C%2B%2B-23-blue?logo=c%2B%2B" alt="C++23">
   <img src="https://img.shields.io/badge/Build-CMake-informational?logo=cmake" alt="CMake">
   <img src="https://img.shields.io/badge/Compiler-MSVC-orange?logo=visualstudio" alt="MSVC">
-  <img src="https://img.shields.io/badge/Editor-VS%20Code-007ACC?logo=visualstudiocode" alt="VSCode">
+  <img src="https://img.shields.io/badge/Editor-Visual%20Studio%202022-blue?logo=visualstudio" alt="Visual Studio 2022">
   <img src="https://img.shields.io/badge/Status-Pre--Alpha-lightgrey" alt="Status">
   <img src="https://img.shields.io/badge/License-Apache-green" alt="License">
 </p>
@@ -79,9 +79,7 @@ _Future structure:_ as functionality expands, expect dedicated `Core`, `Commands
 | **Language** | C++23 |
 | **Build System** | CMake |
 | **Compiler** | MSVC (Windows) |
-| **Editor** | Visual Studio Code |
-| **Testing (Planned)** | GoogleTest / Catch2 |
-
+| **Editor** | Visual Studio 2022 |
 ---
 
 ## 🧱 Development Roadmap
