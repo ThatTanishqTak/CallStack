@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Compiler-MSVC-orange?logo=visualstudio" alt="MSVC">
   <img src="https://img.shields.io/badge/Editor-VS%20Code-007ACC?logo=visualstudiocode" alt="VSCode">
   <img src="https://img.shields.io/badge/Status-Pre--Alpha-lightgrey" alt="Status">
-  <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
+  <img src="https://img.shields.io/badge/License-Apache-green" alt="License">
 </p>
 
 ---
@@ -54,15 +54,23 @@ The first milestone targets the essentials: parsing, built-ins, process handling
 CallStack/
 │
 ├── src/
-│ ├── Core/ # Input handling, tokenizer, main loop
-│ ├── Commands/ # Internal commands implementation
-│ ├── Shell/ # Command dispatcher and runtime manager
-│ ├── System/ # OS interaction layer
-│ └── Utils/ # String helpers, path tools, etc.
+│   ├── BuiltinCommands.cpp
+│   ├── BuiltinCommands.h
+│   ├── CommandParser.cpp
+│   ├── CommandParser.h
+│   ├── Main.cpp
+│   ├── Shell.cpp
+│   └── Shell.h
 │
-├── include/ # Public headers
 ├── CMakeLists.txt # Build configuration
 └── README.md
+
+Current modules:
+- **Shell** (`Shell.cpp` / `Shell.h`): orchestrates the main loop, routing parsed commands to the appropriate handlers.
+- **CommandParser** (`CommandParser.cpp` / `CommandParser.h`): tokenizes user input and produces command structures the shell can execute.
+- **BuiltinCommands** (`BuiltinCommands.cpp` / `BuiltinCommands.h`): implements the built-in commands available in the MVP.
+
+_Future structure:_ as functionality expands, expect dedicated `Core`, `Commands`, and `System` directories alongside a public `include/` tree to keep headers organized.
 
 
 ### Tech Stack
